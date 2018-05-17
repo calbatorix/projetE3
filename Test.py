@@ -11,6 +11,12 @@ from OpenGL.GLU import *
 import os, inspect
 from pygame.transform import scale
 
+from sys import platform as _platform
+if _platform == "win32":
+    scriptPATH = os.path.abspath(inspect.getsourcefile(lambda:0)) # compatible interactive Python Shell
+    scriptDIR  = os.path.dirname(scriptPATH)
+    assets = os.path.join(scriptDIR,"teddy.obj")
+
 # pour pyzo : décommenter la ligne en bas
 #sys.path.insert(0, scriptDIR)
 from objloader import *
@@ -32,8 +38,10 @@ glEnable(GL_DEPTH_TEST)
 glShadeModel(GL_SMOOTH)           # most obj files expect to be smooth-shaded
 
 # LOAD OBJECT AFTER PYGAME INIT
-
-obj = OBJ("teddy.obj",swapyz = True)
+if _platform == "win32":
+    obj = OBJ(assets,swapyz = True)
+elif _platform == "win64":
+    obj = OBJ("teddy.obj",swapyz = True)
 
 clock = pygame.time.Clock()
 
