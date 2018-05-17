@@ -15,7 +15,7 @@ from sys import platform as _platform
 if _platform == "win32":
     scriptPATH = os.path.abspath(inspect.getsourcefile(lambda:0)) # compatible interactive Python Shell
     scriptDIR  = os.path.dirname(scriptPATH)
-    assets = os.path.join(scriptDIR,"teddy.obj")
+    assets = os.path.join(scriptDIR,"maison.obj")
 
 # pour pyzo : décommenter la ligne en bas
 #sys.path.insert(0, scriptDIR)
@@ -41,7 +41,7 @@ glShadeModel(GL_SMOOTH)           # most obj files expect to be smooth-shaded
 if _platform == "win32":
     obj = OBJ(assets,swapyz = True)
 elif _platform == "win64":
-    obj = OBJ("MoodyOBJ.obj",swapyz = True)
+    obj = OBJ("maison.obj",swapyz = True)
 
 clock = pygame.time.Clock()
 
