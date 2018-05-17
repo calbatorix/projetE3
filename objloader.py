@@ -1,13 +1,14 @@
-#detection machine
-from sys import platform as _platform
-if _platform == "win32":
-   scriptPATH = os.path.abspath(inspect.getsourcefile(lambda:0)) # compatible interactive Python Shell
-   scriptDIR  = os.path.dirname(scriptPATH)
 
 import pygame
 import os, inspect
 from OpenGL.GL import *
 from OpenGL.GLU import *
+
+#detection machine
+from sys import platform as _platform
+if _platform == "win32":
+    scriptPATH = os.path.abspath(inspect.getsourcefile(lambda:0)) # compatible interactive Python Shell
+    scriptDIR  = os.path.dirname(scriptPATH)
 
 def MTL(filename):
 
