@@ -72,7 +72,11 @@ class OBJ:
             elif values[0] in ('usemtl', 'usemat'):
                 material = values[1]
             elif values[0] == 'mtllib':
-                self.mtl = MTL(values[1])
+                if _platform == "win32":
+                    assets = os.path.join(scriptDIR,values[1])
+                    self.mtl = MTL(assets)
+                elif _platform == "win64":
+                    self.mtl = MTL(values[1])
             elif values[0] == 'f':
                 face = []
                 texcoords = []

@@ -41,7 +41,7 @@ glShadeModel(GL_SMOOTH)           # most obj files expect to be smooth-shaded
 if _platform == "win32":
     obj = OBJ(assets,swapyz = True)
 elif _platform == "win64":
-    obj = OBJ("teddy.obj",swapyz = True)
+    obj = OBJ("MoodyOBJ.obj",swapyz = True)
 
 clock = pygame.time.Clock()
 
