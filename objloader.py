@@ -1,7 +1,14 @@
+
 import pygame
 import os, inspect
 from OpenGL.GL import *
 from OpenGL.GLU import *
+
+#detection machine
+from sys import platform as _platform
+if _platform == "win32":
+    scriptPATH = os.path.abspath(inspect.getsourcefile(lambda:0)) # compatible interactive Python Shell
+    scriptDIR  = os.path.dirname(scriptPATH)
 
 def MTL(filename):
 
@@ -18,7 +25,11 @@ def MTL(filename):
         elif values[0] == 'map_Kd':
             # load the texture referred to by this declaration
             mtl[values[0]] = values[1]
-            surf = pygame.image.load(mtl['map_Kd'])
+            if _platform == "win32":
+                assets = os.path.join(scriptDIR,mtl['map_Kd'])
+                surf = pygame.image.load(assets)
+            elif _platform == "win64":
+                surf = pygame.image.load(mtl['map_Kd'])
             image = pygame.image.tostring(surf, 'RGBA', 1)
             ix, iy = surf.get_rect().size
             texid = mtl['texture_Kd'] = glGenTextures(1)
@@ -61,7 +72,11 @@ class OBJ:
             elif values[0] in ('usemtl', 'usemat'):
                 material = values[1]
             elif values[0] == 'mtllib':
-                self.mtl = MTL(values[1])
+                if _platform == "win32":
+                    assets = os.path.join(scriptDIR,values[1])
+                    self.mtl = MTL(assets)
+                elif _platform == "win64":
+                    self.mtl = MTL(values[1])
             elif values[0] == 'f':
                 face = []
                 texcoords = []
