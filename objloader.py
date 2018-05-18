@@ -100,7 +100,7 @@ class OBJ:
         glFrontFace(GL_CCW)
         for face in self.faces:
             vertices, normals, texture_coords, material = face
-            '''
+            
             #Texture
             mtl = self.mtl[material]
             if 'texture_Kd' in mtl:
@@ -109,7 +109,7 @@ class OBJ:
             else:
                 # just use diffuse colour
                 glColor(*mtl['Kd'])
-            '''
+
             glBegin(GL_POLYGON)
             for i in range(len(vertices)):
                 if normals[i] > 0:
