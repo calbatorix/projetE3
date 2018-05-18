@@ -16,7 +16,8 @@ from sys import platform as _platform
 if _platform == "win32":
     scriptPATH = os.path.abspath(inspect.getsourcefile(lambda:0)) # compatible interactive Python Shell
     scriptDIR  = os.path.dirname(scriptPATH)
-    assets = os.path.join(scriptDIR,"aa.obj")
+    assets = os.path.join(scriptDIR,"ground2.obj")
+    assets2 = os.path.join(scriptDIR,"maison.obj")
 
 from objloader import *
 # Define some colors
@@ -196,14 +197,16 @@ def Box():
     glPushMatrix(); # cree un sous repère
     if _platform == "win32":
         obj = OBJ(assets,swapyz = True)
+        obj2 = OBJ(assets2,swapyz = True)
     elif _platform == "win64":
-        obj = OBJ("aa.obj",swapyz = True)
+        obj = OBJ("ground2.obj",swapyz = True)
+        obj = OBJ("maison.obj",swapyz = True)
 #    theta = (time.time()*10)%360
 #    h =  (time.time())%10
 
-    glTranslatef(5,5,5)     # translation par rapport au repère parent
-#    glRotatef(0, 0, 0, 0)  # rotation autours de l'axe Y du repère parent
-    glScale(2,2,2)             # zoom autours des axes du repere parent
+    glTranslatef(5,-0.35,5)     # translation par rapport au repère parent
+    glRotatef(-90, 1, 0, 0)  # rotation autours de l'axe Y du repère parent
+    glScale(1,1,0.1)             # zoom autours des axes du repere parent
 
 #    AxesRepere(2)              # desine les axes du repere local
     glCallList(obj.gl_list)
@@ -256,7 +259,7 @@ rotdegres = 0
 if _platform == "win32":
     obj = OBJ(assets,swapyz = True)
 elif _platform == "win64":
-    obj = OBJ("aa.obj",swapyz = True)
+    obj = OBJ("data/aa.obj",swapyz = True)
 
 clock = pygame.time.Clock()
 
